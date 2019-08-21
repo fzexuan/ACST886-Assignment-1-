@@ -1,0 +1,10 @@
+Bill_loan_cashflow_lower_rate <- function(new_instalment){
+  Bill_loan_amount - sum(new_instalment * 
+                           ((1/(1+effective_interestRate))^(1:Bill_loan_term)))
+}
+
+Bill_new_instalment <- uniroot(Bill_loan_cashflow_lower_rate, c(0, 32700))$root
+Bill_new_instalment
+
+reduction <- Bill_loan_repayment - Bill_new_instalment
+reduction
