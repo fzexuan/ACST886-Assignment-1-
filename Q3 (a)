@@ -1,0 +1,6 @@
+Theresa_annual_commission <- 1000
+Theresa_term <- 30
+valuation_interestRate <- 0.035
+Theresa_discount_factor <- (1/(1+valuation_interestRate))^(1:Theresa_term)
+present_value_Theresa_commission <- sum(Theresa_annual_commission * Theresa_discount_factor)
+present_value_Theresa_commission
