@@ -1,0 +1,3 @@
+Bill_loan_amount_plus_commission <- Bill_loan_amount + present_value_Theresa_commission
+
+Bill_loan_amount_plus_commission
