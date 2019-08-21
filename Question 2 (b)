@@ -1,0 +1,62 @@
+offset_balance <- rep(100000, 30)
+annual_instalment <- rep(Scott_loan_repayment, 30)
+interest_repayment <- rep(NA, 30)
+principal_repayment <- rep(NA,30)
+
+
+Scott_interest_repayment_year1 <- 
+  (Scott_loan_amount - Scott_offset_balance) * Scott_interestRate_1 
+
+interest_repayment[1] <- Scott_interest_repayment_year1
+
+
+Scott_principal_repayment_year1 <-
+  Scott_loan_repayment - Scott_interest_repayment_year1
+
+principal_repayment[1] <- Scott_principal_repayment_year1
+
+
+outstanding_loan_BoY <- rep(NA, 30)
+outstanding_loan_BoY[1] <- 600000
+
+outstanding_loan_EoY <- rep(NA, 30)
+outstanding_loan_EoY[1] <- 
+  Scott_loan_amount - Scott_principal_repayment_year1
+
+for (i in 2:30) {
+  outstanding_loan_BoY[i] <- outstanding_loan_EoY[i-1]
+  
+  interest_repayment[i] <- (outstanding_loan_BoY[i] - 
+                              Scott_offset_balance) * Scott_interestRate_1
+  
+  principal_repayment[i] <- Scott_loan_repayment - interest_repayment[i]
+  
+  outstanding_loan_EoY[i] <- outstanding_loan_BoY[i] - principal_repayment[i]
+}
+
+
+Scott_repayment_schedule_30year <- data.frame(outstanding_loan_BoY, offset_balance, 
+                                              annual_instalment,interest_repayment, 
+                                              principal_repayment, outstanding_loan_EoY)
+
+colnames(Scott_repayment_schedule_30year) <- c("Loan BoY", 
+                                               "Offset", "Instalment", 
+                                               "Interest Paid", 
+                                               "Principal Paid", "Loan EoY")
+
+Scott_repayment_schedule_30year
+Scott_repayment_schedule_short <- Scott_repayment_schedule_30year[1:26,]
+
+Scott_repayment_schedule_short$`Instalment`[26] <- 
+  Scott_repayment_schedule_short$`Loan BoY`[26] + 
+  Scott_repayment_schedule_short$`Interest Paid`[26]
+
+Scott_repayment_schedule_short$`Principal Paid`[26] <-
+  Scott_repayment_schedule_short$`Instalment`[26] -
+  Scott_repayment_schedule_short$`Interest Paid`[26]
+
+Scott_repayment_schedule_short$`Loan EoY`[26] <-
+  Scott_repayment_schedule_short$`Loan BoY`[26] -
+  Scott_repayment_schedule_short$`Principal Paid`[26]
+
+Scott_repayment_schedule_short
