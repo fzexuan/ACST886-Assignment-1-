@@ -1,0 +1,26 @@
+```{r, warning=FALSE, message=FALSE}
+library(lubridate)
+DOB_lifeA <- as.Date(format(as.Date("16/05/65", format = "%d/%m/%y"), "19%y-%m-%d"))
+DOP_lifeA <- as.Date(format(as.Date("21/07/85", format = "%d/%m/%y"), "19%y-%m-%d"))
+DOD_lifeA <- as.Date(format(as.Date("22/06/94", format = "%d/%m/%y"), "19%y-%m-%d"))
+
+
+DOB_lifeB <- as.Date(format(as.Date("01/03/22", format = "%d/%m/%y"), "19%y-%m-%d"))
+DOP_lifeB <- as.Date(format(as.Date("23/09/55", format = "%d/%m/%y"), "19%y-%m-%d"))
+DOD_lifeB <- as.Date(format(as.Date("21/07/93", format = "%d/%m/%y"), "19%y-%m-%d"))
+
+
+DOB_lifeC <- as.Date(format(as.Date("21/09/42", format = "%d/%m/%y"), "19%y-%m-%d"))
+DOP_lifeC <- as.Date(format(as.Date("02/06/67", format = "%d/%m/%y"), "19%y-%m-%d"))
+DOD_lifeC <- as.Date(format(as.Date("29/04/96", format = "%d/%m/%y"), "19%y-%m-%d"))
+
+
+death_age_A_a <- time_length(difftime(as.Date(DOD_lifeA), as.Date(DOB_lifeA)), "years") -1
+death_age_A_a
+
+death_age_B_a <- time_length(difftime(as.Date(DOD_lifeB), as.Date(DOB_lifeB)), "years") -1
+death_age_B_a
+
+death_age_C_a <- time_length(difftime(as.Date(DOD_lifeC), as.Date(DOB_lifeC)), "years") -1
+death_age_C_a
+```
