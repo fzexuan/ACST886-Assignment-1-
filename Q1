@@ -1,0 +1,10 @@
+Bill_loan_amount <- 600000
+Bill_interestRate <- 0.035
+Bill_loan_term <- 30
+Bill_discount_factor <- (1/(1+Bill_interestRate))^(1:Bill_loan_term)
+
+Bill_loan_cashflow <- function(x){Bill_loan_amount-sum(x*Bill_discount_factor)}
+
+Bill_loan_repayment <- uniroot(Bill_loan_cashflow, c(0, 40000))$root
+
+Bill_loan_repayment
