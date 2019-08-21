@@ -1,0 +1,7 @@
+f <-  function(interestRate_Reduced)
+  {Bill_loan_amount_plus_commission-
+      sum(Bill_loan_repayment*((1/(1+interestRate_Reduced)))^(1:Bill_loan_term))}
+
+effective_interestRate <- uniroot(f, c(0,0.035))$root
+
+effective_interestRate
