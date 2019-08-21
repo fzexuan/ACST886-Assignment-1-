@@ -1,0 +1,18 @@
+Scott_loan_amount <- 600000
+Scott_offset_balance <- 100000
+Scott_interestRate_1 <- 0.035
+Scott_loan_term_1 <- 30
+
+Scott_discount_factor <- 
+  1/(1+Scott_interestRate_1)^(1:Scott_loan_term_1)
+
+Scott_loan_repayment <- 
+  uniroot(function(s){Scott_loan_amount - sum(s*Scott_discount_factor)}, c(0, 400000))$root
+
+Scott_offset_earning <- Scott_loan_amount*Scott_interestRate_1 - 
+  (Scott_loan_amount-Scott_offset_balance)*Scott_interestRate_1
+
+Scott_loan_repayment_excluding_offset <- Scott_loan_repayment - 
+  Scott_offset_earning
+
+Scott_loan_repayment_excluding_offset
