@@ -1,0 +1,48 @@
+---
+title: "Q3-886 Ass1"
+author: "Zexuan Fang"
+date: "22/08/2019"
+output: pdf_document
+---
+Q3 (a)
+```{r, echo=FALSE}
+Theresa_annual_commission <- 1000
+Theresa_term <- 30
+valuation_interestRate <- 0.035
+Theresa_discount_factor <- (1/(1+valuation_interestRate))^(1:Theresa_term)
+present_value_Theresa_commission <- sum(Theresa_annual_commission * Theresa_discount_factor)
+present_value_Theresa_commission
+```
+
+(b)
+```{r, echo=FALSE}
+Bill_loan_amount_plus_commission <- 600000 + present_value_Theresa_commission
+
+Bill_loan_amount_plus_commission
+```
+
+(c)
+```{r, echo=FALSE}
+f <-  function(interestRate_Reduced)
+  {Bill_loan_amount_plus_commission-
+      sum(32622.798964*((1/(1+interestRate_Reduced)))^(1:30))}
+
+effective_interestRate <- uniroot(f, c(0,0.035))$root
+
+effective_interestRate
+```
+
+
+(d)
+```{r, echo=FALSE}
+Bill_loan_cashflow_lower_rate <- function(new_instalment){
+  600000 - sum(new_instalment * 
+                           ((1/(1+effective_interestRate))^(1:30)))
+}
+
+Bill_new_instalment <- uniroot(Bill_loan_cashflow_lower_rate, c(0, 50000))$root
+Bill_new_instalment
+
+reduction <- 32622.798964 - Bill_new_instalment
+reduction
+```
