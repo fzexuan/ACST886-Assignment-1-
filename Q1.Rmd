@@ -1,0 +1,19 @@
+---
+title: "Q1-886 Ass 1"
+author: "Zexuan Fang"
+date: "22/08/2019"
+output: pdf_document
+---
+Q1.
+```{r, echo=FALSE}
+Bill_loan_amount <- 600000
+Bill_interestRate <- 0.035
+Bill_loan_term <- 30
+Bill_discount_factor <- (1/(1+Bill_interestRate))^(1:Bill_loan_term)
+
+Bill_loan_cashflow <- function(x){Bill_loan_amount-sum(x*Bill_discount_factor)}
+
+Bill_repayment <- uniroot(Bill_loan_cashflow, c(0, 40000))$root
+
+Bill_repayment
+```
