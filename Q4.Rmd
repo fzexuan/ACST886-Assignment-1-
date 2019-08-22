@@ -1,0 +1,52 @@
+---
+title: "Q4-886 Ass 1"
+author: "Zexuan Fang"
+date: "22/08/2019"
+output: pdf_document
+---
+
+Q4
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+library(lubridate)
+DOB_lifeA <- as.Date(format(as.Date("16/05/65", format = "%d/%m/%y"), "19%y-%m-%d")) #Life A date of birth
+DOD_lifeA <- as.Date(format(as.Date("22/06/94", format = "%d/%m/%y"), "19%y-%m-%d")) #Life A date of death
+
+DOB_lifeB <- as.Date(format(as.Date("01/03/22", format = "%d/%m/%y"), "19%y-%m-%d")) #Life B date of birth
+DOD_lifeB <- as.Date(format(as.Date("21/07/93", format = "%d/%m/%y"), "19%y-%m-%d")) #Life B date of death
+
+
+DOB_lifeC <- as.Date(format(as.Date("21/09/42", format = "%d/%m/%y"), "19%y-%m-%d")) #Life C date of birth
+DOD_lifeC <- as.Date(format(as.Date("29/04/96", format = "%d/%m/%y"), "19%y-%m-%d")) #Life C date of death
+BDay_C_1996 <- as.Date(format(as.Date("21/09/96", format = "%d/%m/%y"), "19%y-%m-%d")) #Life C birthday in the year 1996
+
+
+death <- function(date1, date2, k) {
+  if( k == 1){
+  floor(time_length(difftime(as.Date(date1), as.Date(date2)), "years") +1)} ## death definition a
+  else if(k == 2){
+  floor(time_length(difftime(as.Date(date1), as.Date(date2)), "years") -1)} ## death definition b
+  else if(k == 3){
+  floor(time_length(difftime(as.Date(date1), as.Date(date2)), "years"))} ## death definition c
+}
+
+death_A_a <- death(DOD_lifeA, DOB_lifeA, 1) ## A death age under a
+death_A_b <- death(DOD_lifeA, DOB_lifeA, 2) ## A death age under b
+death_A_c <-  death(DOD_lifeA, DOB_lifeA, 3) ## A death age under c
+live_A <- c(death_A_a, death_A_b, death_A_c)
+
+death_B_a <- death(DOD_lifeB, DOB_lifeB, 1) ## B death age under a
+death_B_b <- death(DOD_lifeB, DOB_lifeB, 2) ## B death age under b
+death_B_c <-  death(DOD_lifeB, DOB_lifeB, 3) ## B death age under c
+live_B <- c(death_B_a, death_B_b, death_B_c)
+
+death_C_a <- death(DOD_lifeC, DOB_lifeC, 1) ## C death age under a
+death_C_b <- death(BDay_C_1996, DOB_lifeC, 2) ## C death age under b
+death_C_c <-  death(DOD_lifeC, DOB_lifeC, 3) ## C death age under c
+live_C <- c(death_C_a, death_C_b, death_C_c)
+
+
+death <- c("a", "b", "c")
+
+age_of_death <- cbind(death, live_A, live_B, live_C)
+age_of_death
+```
